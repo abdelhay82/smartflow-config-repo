@@ -9,10 +9,25 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: true
+      ddl-auto: update
     show-sql: true
 
   kafka:
     bootstrap-servers: localhost:9092
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  ai:
+    mcp:
+      server:
+        name: smartflow-task-mcp-server
+        version: 1.0.0
+        protocol: streamable
+        type: sync
+        capabilities:
+          tool: true
+        annotation-scanner:
+          enabled: true
+        streamable-http:
+          mcp-endpoint: /mcp

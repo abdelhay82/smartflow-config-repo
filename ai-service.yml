@@ -1,2 +1,22 @@
 server:
   port: 8083
+
+spring:
+  ai:
+    openai:
+      base-url: http://localhost:11434/v1
+      api-key: ollama
+      chat:
+        options:
+          model: mistral
+          temperature: 0.7
+
+  mcp:
+    client:
+      streamable-http:
+        connections:
+          task-server:
+            url: http://localhost:8082/mcp
+          auth-server:
+            url: http://localhost:8081/mcp
+      initialized: true

@@ -1,2 +1,44 @@
 server:
   port: 8090
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enable: true
+          lower-case-service-id: true
+      route:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=0
+
+        - id: task-service
+          uri: lb://task-service
+          predicates:
+            - Path=/api/tasks/**
+          filters:
+            - StripPrefix=0
+            - JwtAuthFilter
+
+        - id: ai-service
+          uri: lb://ai-service
+          predicates:
+            - Path=/api/ai/**
+          filters:
+            - StripPrefix=0
+            - JwtAuthFilter
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - StripPrefix=0
+            - JwtAuthFilter
+
+jwt:
+  secret: 39cbd9e4018a322208a8d9982c9b75a9ab84637eddcd0c1c6e179f250b4e5100

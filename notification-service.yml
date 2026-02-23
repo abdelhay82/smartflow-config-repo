@@ -2,6 +2,15 @@ server:
   port: 8083
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smartflow_notifications
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
   kafka:
     bootstrap-servers: localhost:9092
   consumer:
@@ -9,3 +18,11 @@ spring:
     auto-offset-reset: earliest
     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    properties:
+      spring.json.trusted.packages: "*"
+
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN}
+    name: smartflow_ai_bot

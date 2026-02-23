@@ -12,6 +12,20 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  ai:
+    mcp:
+      server:
+        name: smartflow-auth-mcp-server
+        version: 1.0.0
+        protocol: streamable
+        type: sync
+        capabilities:
+          tool: true
+        annotation-scanner:
+          enabled: true
+        streamable-http:
+          mcp-endpoint: /mcp
+
 jwt:
   secret: 39cbd9e4018a322208a8d9982c9b75a9ab84637eddcd0c1c6e179f250b4e5100
   expiration: 86400000
